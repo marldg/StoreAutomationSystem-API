@@ -26,6 +26,5 @@ public class ItemVenda {
 
     private Integer quantidade;
 
-    // Guardamos o preco no momento da venda, pois o preco do produto pode mudar depois
     private BigDecimal precoUnitario;
 }
