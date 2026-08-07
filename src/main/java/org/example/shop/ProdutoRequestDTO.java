@@ -3,7 +3,6 @@ package org.example.shop;
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
-// DTO de entrada: o que o cliente envia ao cadastrar/atualizar um produto
 public class ProdutoRequestDTO {
 
     @NotBlank(message = "O nome do produto e obrigatorio")
