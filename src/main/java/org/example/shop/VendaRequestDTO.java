@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// DTO de entrada: cliente envia o id do cliente e a lista de itens da venda
 public class VendaRequestDTO {
 
     @NotNull(message = "O cliente e obrigatorio")
@@ -23,7 +22,6 @@ public class VendaRequestDTO {
     public List<ItemVendaRequestDTO> getItens() { return itens; }
     public void setItens(List<ItemVendaRequestDTO> itens) { this.itens = itens; }
 
-    // DTO interno representando cada item da venda
     public static class ItemVendaRequestDTO {
 
         @NotNull(message = "O produto e obrigatorio")
