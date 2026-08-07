@@ -2,7 +2,6 @@ package org.example.shop;
 
 import java.math.BigDecimal;
 
-// DTO de saida: o que a API devolve ao consultar um produto
 public class ProdutoResponseDTO {
 
     private Long id;
