@@ -26,7 +26,6 @@ public class Venda {
 
     private BigDecimal total;
 
-    // Uma venda tem varios itens; cascade garante que os itens sao salvos junto com a venda
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
     private List<ItemVenda> itens;
 }
