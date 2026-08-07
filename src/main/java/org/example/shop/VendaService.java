@@ -25,11 +25,9 @@ public class VendaService {
 
     @Transactional
     public VendaResponseDTO registrarVenda(VendaRequestDTO dto) {
-        // Busca o cliente
         Cliente cliente = clienteRepository.findById(dto.getClienteId())
                 .orElseThrow(() -> new IllegalArgumentException("Cliente nao encontrado com id: " + dto.getClienteId()));
 
-        // Cria a venda
         Venda venda = new Venda();
         venda.setCliente(cliente);
         venda.setDataVenda(LocalDateTime.now());
@@ -38,11 +36,9 @@ public class VendaService {
         BigDecimal total = BigDecimal.ZERO;
 
         for (VendaRequestDTO.ItemVendaRequestDTO itemDTO : dto.getItens()) {
-            // Busca o produto
             Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
                     .orElseThrow(() -> new IllegalArgumentException("Produto nao encontrado com id: " + itemDTO.getProdutoId()));
 
-            // Verifica se tem estoque suficiente
             if (produto.getQuantidade() < itemDTO.getQuantidade()) {
                 throw new IllegalArgumentException(
                         "Estoque insuficiente para o produto '" + produto.getNome() +
@@ -51,16 +47,14 @@ public class VendaService {
                 );
             }
 
-            // Decrementa o estoque
             produto.setQuantidade(produto.getQuantidade() - itemDTO.getQuantidade());
             produtoRepository.save(produto);
 
-            // Cria o item da venda
             ItemVenda item = new ItemVenda();
             item.setVenda(venda);
             item.setProduto(produto);
             item.setQuantidade(itemDTO.getQuantidade());
-            item.setPrecoUnitario(produto.getPreco()); // preco congelado no momento da venda
+            item.setPrecoUnitario(produto.getPreco());
 
             itens.add(item);
             total = total.add(produto.getPreco().multiply(BigDecimal.valueOf(itemDTO.getQuantidade())));
