@@ -1,71 +1,71 @@
-# Sistema de Automação de Loja
+# Store Automation System
 
-API REST em Java/Spring Boot para gerenciar produtos, clientes e vendas de uma loja, com controle automático de estoque e endpoint de dashboard para integração com sistemas externos.
+REST API built with Java/Spring Boot to manage products, customers and sales, with automatic stock control and a dashboard endpoint for integration with external systems.
 
-## Tecnologias
+## Technologies
 - Java + Spring Boot
 - Spring Data JPA + MySQL
 - Lombok + Maven
 
-## Como rodar
+## How to run
 
-### Pré-requisitos
-- Java 17 ou superior
-- MySQL rodando localmente
+### Prerequisites
+- Java 17 or higher
+- MySQL running locally
 
-### Configuração
-Renomeie o arquivo `application.properties.example` para `application.properties` e ajuste com seus dados:
+### Configuration
+Rename `application.properties.example` to `application.properties` and fill in your credentials:
+```properties
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 ```
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-```
 
-### Iniciando
+### Starting
 ```bash
-git clone https://github.com/marldg/automacaodeloja.git
-cd automacaodeloja
+git clone https://github.com/marldg/StoreAutomationSystem-API.git
+cd StoreAutomationSystem-API
 ./mvnw spring-boot:run
 ```
-Servidor sobe em `http://localhost:8080`. O banco e as tabelas são criados automaticamente.
+Server starts at `http://localhost:8080`. The database and tables are created automatically.
 
 ## Endpoints
 
-### Produtos
-| Método | Rota | Descrição |
+### Products
+| Method | Route | Description |
 |---|---|---|
-| POST | `/produtos` | Cadastrar produto |
-| GET | `/produtos` | Listar todos |
-| GET | `/produtos/{id}` | Buscar por id |
-| PUT | `/produtos/{id}` | Atualizar produto |
-| DELETE | `/produtos/{id}` | Deletar produto |
+| POST | `/produtos` | Create product |
+| GET | `/produtos` | List all |
+| GET | `/produtos/{id}` | Find by id |
+| PUT | `/produtos/{id}` | Update product |
+| DELETE | `/produtos/{id}` | Delete product |
 
-### Clientes
-| Método | Rota | Descrição |
+### Customers
+| Method | Route | Description |
 |---|---|---|
-| POST | `/clientes` | Cadastrar cliente |
-| GET | `/clientes` | Listar todos |
-| GET | `/clientes/{id}` | Buscar por id |
-| PUT | `/clientes/{id}` | Atualizar cliente |
-| DELETE | `/clientes/{id}` | Deletar cliente |
+| POST | `/clientes` | Create customer |
+| GET | `/clientes` | List all |
+| GET | `/clientes/{id}` | Find by id |
+| PUT | `/clientes/{id}` | Update customer |
+| DELETE | `/clientes/{id}` | Delete customer |
 
-### Vendas
-| Método | Rota | Descrição |
+### Sales
+| Method | Route | Description |
 |---|---|---|
-| POST | `/vendas` | Registrar venda |
-| GET | `/vendas` | Listar todas |
-| GET | `/vendas/{id}` | Detalhar venda |
+| POST | `/vendas` | Register sale |
+| GET | `/vendas` | List all |
+| GET | `/vendas/{id}` | Get sale details |
 
-### Dashboard (integração externa)
-| Método | Rota | Descrição |
+### Dashboard (external integration)
+| Method | Route | Description |
 |---|---|---|
-| GET | `/api/dados` | Retorna total de vendas, quantidade de pedidos e status |
+| GET | `/api/dados` | Returns total sales, number of orders and status |
 
-O endpoint `/api/dados` requer autenticação por API Key no header:
+The `/api/dados` endpoint requires API Key authentication in the header:
 ```
-X-API-Key: sua-chave
+X-API-Key: your-key
 ```
 
-**Exemplo de venda:**
+**Sale request example:**
 ```json
 {
   "clienteId": 1,
@@ -74,7 +74,7 @@ X-API-Key: sua-chave
   ]
 }
 ```
-Ao registrar uma venda, o estoque dos produtos é decrementado automaticamente.
+When a sale is registered, the stock of the products is automatically decremented.
 
-## Integração
-Este projeto se integra com o [Sistema de Análise de Loja](https://github.com/marldg/analisedaloja), uma aplicação JavaFX que consome o endpoint `/api/dados` e exibe os dados em um dashboard visual.
+## Integration
+This project integrates with the [Store Analysis](https://github.com/marldg/analisedaloja) — a JavaFX application that consumes the `/api/dados` endpoint and displays the data in a visual dashboard. Also integrates with the [Store Test Site](https://github.com/marldg/Loja-Teste-Completo) — a React + Tailwind CSS web interface.
